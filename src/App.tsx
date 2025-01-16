@@ -13,13 +13,14 @@ function App() {
     lastName: ''
   });
 
-  function handleFirstNameChange(event: any) {
-    setFormData({...formData, firstName: event.target.value}) //pega valor do input
-  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function handleInputChange(event: any) {
 
-function handleLastNameChange(event:any) {
-  setFormData({...formData, lastName: event.target.value})
-}
+    const value = event.target.value; //pega valor do input
+    const name = event.target.name;  //pega name do input
+
+    setFormData({ ...formData, [name]: value }); //pega o input dinâmicamente
+  }
 
   return (
     <form >
@@ -27,11 +28,11 @@ function handleLastNameChange(event:any) {
         <input
           name="firstName"
           // associa ao objeto
-          value={formData.firstName} 
+          value={formData.firstName}
           type="text"
           placeholder="Digite seu nome"
           // associar ao evento
-          onChange={handleFirstNameChange}
+          onChange={handleInputChange}
         />
       </div>
       <div>
@@ -40,10 +41,10 @@ function handleLastNameChange(event:any) {
           value={formData.lastName}
           type="text"
           placeholder="Digite seu sobrenome"
-          onChange={handleLastNameChange}
+          onChange={handleInputChange}
         />
       </div>
-      <button>Mostrar nome completo</button>
+      <button  >Mostrar nome completo</button>
     </form>
   )
 }
