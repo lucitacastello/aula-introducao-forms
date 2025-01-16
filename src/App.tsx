@@ -1,34 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+
+// objeto
+type FormData = {
+  firstName: string;
+  lastName: string;
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: ''
+  });
+
+  function handleFirstNameChange(event: any) {
+    setFormData({...formData, firstName: event.target.value}) //pega valor do input
+  }
+
+function handleLastNameChange(event:any) {
+  setFormData({...formData, lastName: event.target.value})
+}
 
   return (
-    <>
+    <form >
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <input
+          name="firstName"
+          // associa ao objeto
+          value={formData.firstName} 
+          type="text"
+          placeholder="Digite seu nome"
+          // associar ao evento
+          onChange={handleFirstNameChange}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div>
+        <input
+          name="lastName"
+          value={formData.lastName}
+          type="text"
+          placeholder="Digite seu sobrenome"
+          onChange={handleLastNameChange}
+        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <button>Mostrar nome completo</button>
+    </form>
   )
 }
 
